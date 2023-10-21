@@ -29,7 +29,7 @@ const config: Config = {
 
           error: "#f72008",
           body:{
-            "background-color":"#e3e6e6",
+            "background-color":"#2D2E2E",
           }
         },
       },
