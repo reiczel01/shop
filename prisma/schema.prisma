@@ -1,20 +1,25 @@
+// Definicja generatora klienta Prisma
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client-js" // Używamy klienta Prisma do dostępu do bazy danych.
 }
 
+// Źródło danych dla bazy danych MongoDB
 datasource db {
-  provider = "mongodb"
-  url      = env("DATABASE_URL")
+  provider = "mongodb" // Wykorzystujemy MongoDB jako źródło danych.
+  url      = env("DATABASE_URL") // URL bazy danych pobierany z zmiennych środowiskowych.
 }
 
+// Model reprezentujący produkty w bazie danych
 model Product {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  description String
-  imageUrl    String
-  name        String
-  price       Int
-  createdAt   DateTime @default(now())
-  updaeAt     DateTime @updatedAt
+  // Unikalny identyfikator produktu (ID) jako ciąg znaków.
+  
+  description String // Opis produktu przechowywany jako ciąg znaków.
+  imageUrl    String // URL obrazu produktu przechowywany jako ciąg znaków.
+  name        String // Nazwa produktu przechowywana jako ciąg znaków.
+  price       Int    // Cena produktu przechowywana jako liczba całkowita.
+  createdAt   DateTime @default(now()) // Data utworzenia produktu, domyślnie ustawiana na bieżący czas.
+  updaeAt     DateTime @updatedAt     // Data ostatniej aktualizacji produktu, automatycznie aktualizowana.
 
-  @@map("products")
+  @@map("products") // Mapowanie tego modelu na kolekcję "products" w bazie danych MongoDB.
 }

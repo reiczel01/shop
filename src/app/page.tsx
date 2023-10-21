@@ -3,7 +3,9 @@ import prisma from "@/lib/db/prisma";
 import ProductCard from "@/components/ProductCard";
 import Link from "next/link";
 
+// Komponent strony głównej.
 export default async function Home() {
+  // Pobieranie listy produktów z bazy danych za pomocą Prisma i sortowanie ich według identyfikatora w kolejności malejącej.
   const products = await prisma.product.findMany({
     orderBy: {
       id: "desc",
@@ -12,8 +14,10 @@ export default async function Home() {
 
   return (
     <div>
+      {/* Sekcja bohatera z głównym produktem */}
       <div className="hero rounded-xl bg-base-200">
         <div className="hero-content flex-col lg:flex-row">
+          {/* Wyświetlanie obrazu głównego produktu za pomocą komponentu Image z Next.js */}
           <Image
             src={products[0].imageUrl}
             alt={products[0].name}
@@ -23,17 +27,22 @@ export default async function Home() {
             priority
           />
           <div>
+            {/* Wyświetlanie nazwy, opisu i przycisku "ZOBACZ PRODUKT" */}
             <h1 className="text-5xl font-bold">{products[0].name}</h1>
             <p className="py-6">{products[0].description}</p>
             <Link
-            href={"/products/" + products[0].id}
-            className="btn btn-primary">ZOBACZ PRODUKT</ Link>
+              href={"/products/" + products[0].id}
+              className="btn btn-primary"
+            >
+              ZOBACZ PRODUKT
+            </Link>
           </div>
         </div>
       </div>
 
-      <div className="my-4 grid grid-col-2 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
-        {/* renderowanie listy produktów */}
+      {/* Sekcja z listą produktów */}
+      <div className="my-4 grid grid-cols-2 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
+        {/* Renderowanie listy produktów, pomijając pierwszy element (główny produkt) */}
         {products.slice(1).map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
