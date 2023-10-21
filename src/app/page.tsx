@@ -41,7 +41,7 @@ export default async function Home() {
       </div>
 
       {/* Sekcja z listą produktów */}
-      <div className="my-4 grid grid-cols-2 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
+      <div className="my-4 grid gap-4 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
         {/* Renderowanie listy produktów, pomijając pierwszy element (główny produkt) */}
         {products.slice(1).map((product) => (
           <ProductCard key={product.id} product={product} />
