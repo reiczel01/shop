@@ -3,8 +3,9 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import PriceTag from "@/components/PriceTag";
 import { cache } from "react";
-import { get } from "http";
+import AddToCartButton from "@/app/products/[id]/AddToCartButton";
 import { Metadata } from "next";
+import { incrementProductQuantity } from "./actions";
 
 // Interfejs właściwości przekazywanych do komponentu ProductPage.
 interface ProductPageProps {
@@ -65,6 +66,8 @@ export default async function ProductPage({
         {/* Wyświetlanie ceny produktu za pomocą komponentu PriceTag. */}
         <PriceTag price={product.price} className="mt-4" />
         <p className="py-6">{product.description}</p>
+        {/* Wyświetlanie przycisku "Dodaj do koszyka" za pomocą komponentu AddToCartButton. */}
+        <AddToCartButton productId={product.id} incrementProductQuantity={incrementProductQuantity}/>
       </div>
     </div>
   );
