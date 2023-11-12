@@ -2,51 +2,70 @@ import Image from "next/image";
 import prisma from "@/lib/db/prisma";
 import ProductCard from "@/components/ProductCard";
 import Link from "next/link";
+import PaginationBar from "@/components/PaginationBar";
+
+interface HomeProps {
+  searchParams: { page: string };
+}
 
 // Komponent strony głównej.
-export default async function Home() {
+export default async function Home({
+  searchParams: { page = "1" },
+}: HomeProps) {
+  const currentPage = parseInt(page);
+
+  const pageSize = 12;
+  const heroItemCount = 1;
+
+  const totalIetmCount = await prisma.product.count();
+
+  const totalPages = Math.ceil((totalIetmCount - heroItemCount) / pageSize);
   // Pobieranie listy produktów z bazy danych za pomocą Prisma i sortowanie ich według identyfikatora w kolejności malejącej.
   const products = await prisma.product.findMany({
     orderBy: {
       id: "desc",
     },
+    skip:
+      (currentPage - 1) * pageSize + (currentPage === 1 ? 0 : heroItemCount),
+    take: pageSize + (currentPage === 1 ? heroItemCount : 0),
   });
 
   return (
-    <div>
-      {/* Sekcja bohatera z głównym produktem */}
+    <div className="flex flex-col items-center">
+    {currentPage === 1 && (
       <div className="hero rounded-xl bg-base-200">
         <div className="hero-content flex-col lg:flex-row">
-          {/* Wyświetlanie obrazu głównego produktu za pomocą komponentu Image z Next.js */}
           <Image
             src={products[0].imageUrl}
             alt={products[0].name}
-            width={600}
-            height={1000}
-            className="w-full max-w-md rounded-lg shadow-2xl"
+            width={400}
+            height={800}
+            className="w-full max-w-sm rounded-lg shadow-2xl"
             priority
           />
           <div>
-            {/* Wyświetlanie nazwy, opisu i przycisku "ZOBACZ PRODUKT" */}
             <h1 className="text-5xl font-bold">{products[0].name}</h1>
             <p className="py-6">{products[0].description}</p>
             <Link
               href={"/products/" + products[0].id}
-              className="btn btn-primary"
+              className="btn-primary btn"
             >
-              ZOBACZ PRODUKT
+              Check it out
             </Link>
           </div>
         </div>
       </div>
+    )}
 
-      {/* Sekcja z listą produktów */}
-      <div className="my-4 grid gap-4 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-        {/* Renderowanie listy produktów, pomijając pierwszy element (główny produkt) */}
-        {products.slice(1).map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
+    <div className="my-4 grid gap-4 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+      {(currentPage === 1 ? products.slice(1) : products).map((product) => (
+        <ProductCard product={product} key={product.id} />
+      ))}
     </div>
-  );
+
+    {totalPages > 1 && (
+      <PaginationBar currentPage={currentPage} totalPages={totalPages} />
+    )}
+  </div>
+);
 }

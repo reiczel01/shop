@@ -9,13 +9,13 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 
 
-async function serchProducts(formData: FormData) {
+async function searchProducts(formData: FormData) {
   "use server";
 
   const searchQuery = formData.get("searchQuery")?.toString();
 
   if (searchQuery) {
-    redirect("/search?querys" + searchQuery);
+    redirect("/search?query=" + searchQuery);
   }
 }
 
@@ -37,19 +37,19 @@ export default async function Navbar() {
             />
             Shopla
           </Link>
-        </div>
+          </div>
         <div className="flex-none gap-2">
-          <form action={serchProducts}>
+          <form action={searchProducts}>
             <div className="form-control">
               <input
-                name="serchQuery"
-                placeholder="Szukaj"
-                className="input input-bordered w-full min-w-[100px]"
+                name="searchQuery"
+                placeholder="Search"
+                className="input-bordered input w-full min-w-[100px]"
               />
             </div>
           </form>
           <ShoppingCartButton cart={cart} />
-          <UserMenuButton session={session}/>
+          <UserMenuButton session={session} />
         </div>
       </div>
     </div>
