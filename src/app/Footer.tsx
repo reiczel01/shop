@@ -1,4 +1,5 @@
 "use client"
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function Footer() {
@@ -17,10 +18,8 @@ export default function Footer() {
     //TODO: Pozamieniać linki na strony
     <footer className="footer footer-center rounded bg-base-200 p-10 text-base-content">
       <nav className="grid grid-flow-col gap-4">
-        <a className="link-hover link">About us</a>
-        <a className="link-hover link">Contact</a>
-        <a className="link-hover link">Jobs</a>
-        <a className="link-hover link">Press kit</a>
+        <Link href={"/rodo"} className="link-hover link">Rodo</Link>
+        <Link href={"/terms"} className="link-hover link">Regulamin</Link>
       </nav>
       <nav>
         <div className="grid grid-flow-col gap-4">
