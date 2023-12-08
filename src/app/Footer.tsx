@@ -20,6 +20,7 @@ export default function Footer() {
       <nav className="grid grid-flow-col gap-4">
         <Link href={"/rodo"} className="link-hover link">Rodo</Link>
         <Link href={"/terms"} className="link-hover link">Regulamin</Link>
+        <Link href={"/contact"} className="link-hover link">Kontakt</Link>
       </nav>
       <nav>
         <div className="grid grid-flow-col gap-4">

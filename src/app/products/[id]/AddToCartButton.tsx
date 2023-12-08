@@ -5,25 +5,26 @@ import { set } from "zod";
 
 interface AddToCartButtonProps {
   productId: string;
-  incrementProductQuantity: (productId: string) => Promise<void>;
+  incrementProductQuantity: (productId: string) => Promise<void>;// Funkcja do zwiększania ilości produktu w koszyku
 }
 
 export default function AddToCartButton({
   productId,
   incrementProductQuantity,
 }: AddToCartButtonProps) {
-  const [isPending, startTransaction] = useTransition();
-  const [success, setSuccess] = useState(false);
+  const [isPending, startTransaction] = useTransition();// Hook do obsługi stanu transakcji
+  const [success, setSuccess] = useState(false);// Stan określający sukces dodania do koszyka
 
   return (
     <div className="flex items-center gap-2">
       <button
         className="btn btn-primary"
         onClick={() => {
-          setSuccess(false);
+          setSuccess(false);// Resetowanie stanu sukcesu
+          // Rozpoczęcie transakcji - dodanie produktu do koszyka
           startTransaction(async () => {
-            await incrementProductQuantity(productId);
-            setSuccess(true);
+            await incrementProductQuantity(productId);// Wywołanie funkcji do zwiększenia ilości produktu w koszyku
+            setSuccess(true);// Ustawienie sukcesu na true po dodaniu do koszyka
           });
         }}
       >

@@ -7,16 +7,19 @@ import { formatPrice } from "@/lib/format";
 import { useTransition } from "react";
 import { setProductQuantity } from "./actions";
 
+// Props dla komponentu CardEntry
 interface CardEntryProps {
-  cartItem: CartItemWithProduct;
-  setProductQuantity: (productId: string, quantity: number) => Promise<void>;
+  cartItem: CartItemWithProduct; // Obiekt zawierający informacje o elemencie koszyka i jego produktach
+  setProductQuantity: (productId: string, quantity: number) => Promise<void>; // Funkcja do ustawiania ilości produktu w koszyku
 }
 
+// Komponent CardEntry reprezentujący pojedynczy wpis produktu w koszyku
 export default function CardEntry({
-  cartItem: { product, quantity },
+  cartItem: { product, quantity }, // Destructuring propsa cartItem na product i quantity
 }: CardEntryProps) {
-  const [isPending, startTransaction] = useTransition();
+  const [isPending, startTransaction] = useTransition(); // Użycie hooka useTransition
 
+  // Generowanie listy opcji ilości produktu do wyboru
   const quantityOptions: JSX.Element[] = [];
   for (let i = 1; i <= 99; i++) {
     quantityOptions.push(

@@ -84,6 +84,7 @@ model User {
   accounts         Account[]
   sessions         Session[]
   Cart             Cart[]
+  payments         Payment[]
 
   @@map("users")
 }
@@ -96,4 +97,16 @@ model VerificationToken {
 
   @@unique([identifier, token])
   @@map("verificationtokens")
+}
+
+model Payment {
+  id                  String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  stripePaymentIntentId String
+  amount              Int
+  userId              String   @db.ObjectId
+  User                User     @relation(fields: [userId], references: [id])
+  
+  @@map("payments")
 }

@@ -8,14 +8,15 @@ import UserMenuButton from "./UserMenuButton";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 
+// Funkcja asynchroniczna searchProducts służąca do wyszukiwania produktów
 
 async function searchProducts(formData: FormData) {
   "use server";
 
-  const searchQuery = formData.get("searchQuery")?.toString();
+  const searchQuery = formData.get("searchQuery")?.toString();// Pobranie z formularza wartości wyszukiwania
 
   if (searchQuery) {
-    redirect("/search?query=" + searchQuery);
+    redirect("/search?query=" + searchQuery);// Przekierowanie na stronę wyszukiwania z danym zapytaniem
   }
 }
 
@@ -29,7 +30,6 @@ export default async function Navbar() {
         <div className="flex-1">
           <Link href="/" className="btn btn-ghost text-xl normal-case">
             <Image
-              //TODO: Zmienić Logo
               src={logo}
               alt="Shopla logo"
               width={40}
@@ -38,12 +38,12 @@ export default async function Navbar() {
             Shopla
           </Link>
           </div>
-        <div className="flex-none gap-2">
+        <div className="flex gap-2">
           <form action={searchProducts}>
             <div className="form-control">
               <input
                 name="searchQuery"
-                placeholder="Search"
+                placeholder="Wyszukaj..."
                 className="input-bordered input w-full min-w-[100px]"
               />
             </div>

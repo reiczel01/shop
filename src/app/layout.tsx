@@ -5,6 +5,7 @@ import Navbar from "./Navbar/Navbar";
 import Footer from "./Footer";
 import SessionProvider from "./SessionProvider"
 
+
 // Inicjalizacja czcionki Inter z określonym podzbiorem "latin".
 const inter = Inter({ subsets: ["latin"] });
 

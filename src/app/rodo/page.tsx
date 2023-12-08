@@ -1,11 +1,11 @@
 export default function Rodo() {
   return (
-    <div>
+    <div className="flex flex-wrap whitespace-pre-line">
       <h1 className="pb-10 text-center text-2xl">
         <strong>Polityka prywatności</strong>
       </h1>
 
-      <h2 className="py-4">
+      <h2 className="divider pb-4 pt-4 text-center text-lg sm:text-lg md:text-lg lg:text-lg xl:text-lg">
         Polityka prywatności opisuje zasady przetwarzania przez nas informacji
         na Twój temat, w tym danych osobowych oraz ciasteczek, czyli tzw.
         cookies.

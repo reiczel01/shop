@@ -77,7 +77,7 @@ export default async function AddProductPage() {
           className="input input-bordered mb-3 w-full"
         />
         <FormSubmitButton className="btn-block">
-          Add Product
+          Dodaj produkt
         </FormSubmitButton>
       </form>
     </div>

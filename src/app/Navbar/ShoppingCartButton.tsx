@@ -4,15 +4,17 @@ import { ShoppingCart } from "@/lib/db/cart";
 import { formatPrice } from "@/lib/format";
 import Link from "next/link";
 
+// Props dla komponentu ShoppingCartButton
 interface ShoppingCartButtonProps {
   cart: ShoppingCart | null;
 }
 
 export default function ShoppingCartButton({ cart }: ShoppingCartButtonProps) {
+  // Props dla komponentu ShoppingCartButton
   function closeDropdown() {
-    const element = document.activeElement as HTMLElement;
+    const element = document.activeElement as HTMLElement; // Props dla komponentu ShoppingCartButton
     if (element) {
-      element.blur();
+      element.blur();// Props dla komponentu ShoppingCartButton
     }
   }
   return (

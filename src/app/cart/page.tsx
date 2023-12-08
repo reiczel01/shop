@@ -1,14 +1,21 @@
+
 import {getCart} from "@/lib/db/cart";
 import CartEntry from "./CartEntry";
 import { setProductQuantity } from "./actions";
 import { formatPrice } from "@/lib/format";
+import Link from "next/link";
 
+
+
+// Obiekt metadata z informacjami o stronie
 export const metadata = {
-    title: "Twój koszyk",
-    description: "Super sklep internetowy"
-}
-export default async function CartPage() {
-    const cart = await getCart();
+    title: "Twój koszyk", // Tytuł strony
+    description: "Super sklep internetowy", // Opis strony
+  };
+  
+  // Komponent CartPage reprezentujący stronę koszyka
+  export default async function CartPage() {
+    const cart = await getCart(); // Pobranie koszyka
 
     return(
         <div>
@@ -21,7 +28,9 @@ export default async function CartPage() {
                 <p className="mb-3 font-bold">
                     Suma: {formatPrice(cart?.subtotal || 0)}
                 </p>
+                <Link href="/checkout">
                 <button className="btn btn-primary sm:w-[200px]">Zamów</button>
+                </Link>
             </div>
             
         </div>

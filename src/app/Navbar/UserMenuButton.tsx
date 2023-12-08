@@ -5,12 +5,13 @@ import Image from "next/image";
 import profilePicPlaceholder from "@/assets/profile-pic-placeholder.png";
 import { signIn, signOut } from "next-auth/react";
 
+// Props dla komponentu UserMenuButton
 interface UserMenuButtonProps {
   session: Session | null;
 }
 
 export default function UserMenuButton({ session }: UserMenuButtonProps) {
-  const user = session?.user;
+  const user = session?.user;// Pobranie danych użytkownika z sesji, jeśli istnieje
   return (
     <div className="dropdown dropdown-end">
       <label tabIndex={0} className="btn btn-ghost rounded-btn">
@@ -38,6 +39,7 @@ export default function UserMenuButton({ session }: UserMenuButtonProps) {
         className="menu dropdown-content rounded-box menu-sm z-30 mt-3 w-52 bg-base-100 p-2 shadow"
       >
         <li>
+          {/* Warunek wyświetlający odpowiedni przycisk (zaloguj lub wyloguj) */}
           {user ? (
             <button onClick={() => signOut({ callbackUrl: "/" })}>
               Wyloguj
