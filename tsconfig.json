@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/api/checkout_session.js", "src/api/create-payment-intent.js", "src/app/checkout/page.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/api/checkout_session.js", "src/app/api/create-payment-intent.ts", "src/app/checkout/page.tsx"],
   "exclude": ["node_modules"]
 }
